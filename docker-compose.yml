@@ -1,0 +1,31 @@
+#Local Dev Template - Drupal 8
+version: '3'
+services:
+  apache:
+    image: usdadaito/ewaps:php73
+    container_name: nifa_d8webv3
+    environment:
+      DOCROOT: /var/application/web
+    links:
+      - NADgov-MariaDB:db
+    volumes:
+    - .:/var/application
+    - ./nifa/public-content/:/mnt/public-content/
+    - ./nifa/settings-php/:/mnt/settings-php/
+    - ./nifa/private-content/:/mnt/private-content/
+    - ./nifa/tmp/:/mnt/tmp/         
+    tty: true
+    ports:
+      - 8028:80/tcp
+  NADgov-MariaDB:
+    image: mariadb:10.5
+    container_name: nifa_d8datav3
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_PASSWORD: pQjvFHJQnfZBE2vK
+      MYSQL_ROOT_PASSWORD: q6eZZY2c7N5zx85k
+      MYSQL_USER: sysop_user
+    stdin_open: true
+    volumes:
+    - ./nifa/mysql:/var/lib/mysql
+    tty: true

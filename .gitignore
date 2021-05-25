@@ -55,3 +55,9 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+# NIFA #
+########
+nifa
+nifa/*
+
